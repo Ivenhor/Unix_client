@@ -48,6 +48,9 @@ Thumbs.db
 *.mov
 *.wmv
 
+#VS code files
+*.code-workspace
+
 build/
 doc/
 .settings/
