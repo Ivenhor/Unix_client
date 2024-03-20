@@ -40,7 +40,4 @@ socket_error_t close_connection(UnixClient *client);
 
 socket_error_t get_user_command(UnixClient *client);
 
-socket_error_t mock_test(UnixClient *client); //TODO delete after tests
-int            set_gpio(int pin);
-
 #endif /*_UNIX_SOCKET_H_*/

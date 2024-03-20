@@ -15,14 +15,6 @@ target_link_libraries(Unix_client
     Unix_socket
 )
 
-add_executable(unit_tests
-	test/main.c
-)
-
-target_link_libraries(unit_tests PRIVATE cmocka-static Unix_socket)
-#add_test(NAME unit_tests COMMAND unit_tests)
-set_target_properties(unit_tests PROPERTIES LINK_FLAGS "-Wl,--wrap=set_gpio")
-
 ##################################################################################
 # Добавляем исполняемый файл для тестов закрытия соединения
 add_executable(close_connection test/close_connection.c)
@@ -75,6 +67,16 @@ target_link_libraries(user_command PRIVATE cmocka-static Unix_socket)
 # Добавляем тесты закрытия соединения в список тестов
 add_test(NAME user_command COMMAND user_command)
 set_target_properties(user_command PROPERTIES LINK_FLAGS "-Wl,--wrap=fgets")
+##################################################################################
+# Добавляем исполняемый файл для тестов закрытия соединения
+add_executable(initialize_client test/initialize_client.c)
+
+# Линкуем тесты с библиотекой Unix_socket и cmocka
+target_link_libraries(initialize_client PRIVATE cmocka-static Unix_socket)
+
+# Добавляем тесты закрытия соединения в список тестов
+add_test(NAME initialize_client COMMAND initialize_client)
+set_target_properties(initialize_client PROPERTIES LINK_FLAGS "-Wl,--wrap=socket")
 ##################################################################################
 set(CPACK_PACKAGE_NAME "Unix_socket")
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
